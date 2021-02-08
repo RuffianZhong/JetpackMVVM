@@ -1,0 +1,4 @@
+include ':framework_http'
+include ':framework_mvvm'
+include ':app'
+rootProject.name = "MVVM"
