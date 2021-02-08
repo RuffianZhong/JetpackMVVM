@@ -61,7 +61,6 @@
             android:layout_marginRight="@dimen/dp_30"
             android:drawablePadding="@dimen/dp_4"
             android:hint="@string/hint_psw"
-            android:text="zhong920306"
             app:afterTextChangedEvent="@{afterTextChanged}"
             app:icon_height_left="@dimen/dp_22"
             app:icon_normal_left="@mipmap/ic_launcher"
