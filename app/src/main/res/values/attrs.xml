@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 首页底部操作栏 -->
+    <declare-styleable name="footerTabView">
+        <attr name="tab_checked" format="boolean" />
+        <attr name="tab_text" format="reference|string" />
+        <attr name="tab_text_color_selected" format="reference" />
+        <attr name="tab_text_color_default" format="reference" />
+        <attr name="tab_icon_selected" format="reference" />
+        <attr name="tab_icon_default" format="reference" />
+    </declare-styleable>
+</resources>

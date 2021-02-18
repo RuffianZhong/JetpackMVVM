@@ -18,6 +18,8 @@ public interface IAccountView {
         public void loginSuccess(UserBean userBean);
 
         public void onError(int code, String desc);
+
+        public void onLoginClickEvent(String account, String psw);
     }
 
     /**

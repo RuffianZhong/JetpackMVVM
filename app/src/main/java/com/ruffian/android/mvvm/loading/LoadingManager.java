@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.ruffian.android.framework.http.utils.LogUtils;
 import com.ruffian.android.mvvm.common.ActivityManager;
 
 /**
@@ -40,10 +39,8 @@ public class LoadingManager {
      * 展示Loading
      */
     public void showProgressDialog() {
-        if (mFragmentManager == null) {
-            ((FragmentActivity) ActivityManager.get().context()).getSupportFragmentManager();
-        }
-        LogUtils.e("============mFragmentManager======" + mFragmentManager);
+        if (mFragmentManager == null)
+            mFragmentManager = ((FragmentActivity) ActivityManager.get().context()).getSupportFragmentManager();
         //为了不重复显示dialog，在显示对话框之前移除正在显示的对话框
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         Fragment fragment = mFragmentManager.findFragmentByTag(DIALOG_PROGRESS_TAG);

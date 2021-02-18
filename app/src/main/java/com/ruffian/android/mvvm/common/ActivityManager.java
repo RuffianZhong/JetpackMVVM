@@ -113,17 +113,9 @@ public class ActivityManager {
      * @return
      */
     public Context context() {
-        return context;
+        return peek();
     }
 
-    /**
-     * 设置当前上下文对象
-     *
-     * @param context
-     */
-    public void setContext(Context context) {
-        this.context = context;
-    }
 
     /**
      * 退出应用程序

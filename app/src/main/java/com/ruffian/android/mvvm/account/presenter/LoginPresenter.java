@@ -23,23 +23,23 @@ public class LoginPresenter extends MVVMPresenter<IAccountView.ILoginView> {
      * @param password
      */
     public void login(String account, String password) {
-       // LoadingManager.get().showProgressDialog();
+        LoadingManager.get().showProgressDialog();
         ModelFactory.getModel(AccountModel.class).login(account, password, getView().getLifecycleOwner(), new IModelCallback.Http<UserBean>() {
             @Override
             public void onSuccess(UserBean object) {
-           //     LoadingManager.get().dismissLoading();
+                LoadingManager.get().dismissLoading();
                 if (isAttached()) getView().loginSuccess(object);
             }
 
             @Override
             public void onError(int code, String msg) {
-            //    LoadingManager.get().dismissLoading();
+                LoadingManager.get().dismissLoading();
                 if (isAttached()) getView().onError(code, msg);
             }
 
             @Override
             public void onCancel() {
-            //    LoadingManager.get().dismissLoading();
+                LoadingManager.get().dismissLoading();
             }
         });
     }

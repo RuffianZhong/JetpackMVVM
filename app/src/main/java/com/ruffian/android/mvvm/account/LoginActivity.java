@@ -1,11 +1,8 @@
 package com.ruffian.android.mvvm.account;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +11,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.ruffian.android.framework.http.utils.LogUtils;
+import com.ruffian.android.mvvm.MainActivity;
 import com.ruffian.android.mvvm.R;
 import com.ruffian.android.mvvm.account.entity.UserBean;
 import com.ruffian.android.mvvm.account.presenter.LoginPresenter;
@@ -21,14 +20,13 @@ import com.ruffian.android.mvvm.account.view.IAccountView;
 import com.ruffian.android.mvvm.account.viewmodel.LoginViewModel;
 import com.ruffian.android.mvvm.common.BaseActivity;
 import com.ruffian.android.mvvm.databinding.LoginDataBinding;
-import com.ruffian.android.mvvm.viewbinding.IEditTextEvent;
 
 /**
  * 登录
  *
  * @author ZhongDaFeng
  */
-public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPresenter> implements IEditTextEvent.IAfterTextChanged, IAccountView.ILoginView {
+public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPresenter> implements IAccountView.ILoginView {
 
     private LoginViewModel loginViewModel;
 
@@ -42,8 +40,8 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
         super.onCreate(savedInstanceState);
         //dataBinding
         final LoginDataBinding dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        dataBinding.setAccount(new UserBean());
-        dataBinding.setAfterTextChanged(this);
+        dataBinding.setLoginView(this);
+
         //viewModel
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.getUserBean().observe(this, new Observer<UserBean>() {
@@ -52,17 +50,12 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
                 //userBean变化了
             }
         });
+    }
 
-        //login
-        dataBinding.tvLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String account = dataBinding.etAccount.getText().toString();
-                String psw = dataBinding.etPsw.getText().toString();
-                if (TextUtils.isEmpty(account) || TextUtils.isEmpty(psw)) return;
-                getMVVMPresenter().login(account, psw);
-            }
-        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getMVVMPresenter().login("632835821@qq.com", "zhong920306");
     }
 
     private void updateUserBean(String account) {
@@ -73,16 +66,14 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
         loginViewModel.getUserBean().setValue(newUserBean);
     }
 
-    @Override
-    public void afterTextChanged(EditText editText, Editable editable) {
-        Log.e("tag", "====afterTextChanged====editText" + editText + "===editable===" + editable.toString());
-    }
-
 
     @Override
     public void loginSuccess(UserBean userBean) {
         if (userBean != null)
             showToast(userBean.getNickname());
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -91,7 +82,14 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
     }
 
     @Override
+    public void onLoginClickEvent(String account, String psw) {
+        if (TextUtils.isEmpty(account) || TextUtils.isEmpty(psw)) return;
+        getMVVMPresenter().login(account, psw);
+    }
+
+    @Override
     public void showToast(@NonNull String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
 }

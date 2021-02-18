@@ -3,6 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+
     <!--transparent-->
     <color name="transparent">#00000000</color>
     <!--white-->
@@ -27,6 +29,9 @@
     <color name="black_30">#4d000000</color>
     <color name="black_20">#33000000</color>
     <color name="black_10">#1a000000</color>
+    <!--red-->
+    <color name="red">#FF0000</color>
+    <color name="red_tip">#FF485A</color>
 
     <!--bg-->
     <color name="btn_bg_start">#00D09F</color>
@@ -34,6 +39,10 @@
     <array name="array_btn_bg">
         <item>@color/btn_bg_start</item>
         <item>@color/btn_bg_end</item>
+    </array>
+    <array name="array_tab_bg_default">
+        <item>@color/transparent</item>
+        <item>@color/transparent</item>
     </array>
 
 

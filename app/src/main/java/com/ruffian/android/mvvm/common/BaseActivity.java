@@ -17,14 +17,8 @@ public class BaseActivity<V extends IMVVMView, P extends IPresenter<V>> extends 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         ActivityManager.get().push(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ActivityManager.get().setContext(this);
+        super.onCreate(savedInstanceState);
     }
 
     @Override

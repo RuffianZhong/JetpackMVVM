@@ -1,4 +1,4 @@
-package com.ruffian.android.mvvm.account.viewmodel;
+package com.ruffian.android.mvvm.viewbinding;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,7 +8,6 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.adapters.ListenerUtil;
 
 import com.ruffian.android.mvvm.R;
-import com.ruffian.android.mvvm.viewbinding.IEditTextEvent;
 
 /**
  * 自定义ViewBindingAdapter
@@ -16,7 +15,7 @@ import com.ruffian.android.mvvm.viewbinding.IEditTextEvent;
  *
  * @author ZhongDaFeng
  */
-public class ViewBindingAdapter {
+public class CustomViewBindingAdapter {
 
     /**
      * 设置 EditText 事件
@@ -26,7 +25,7 @@ public class ViewBindingAdapter {
      * @param onTextChanged
      * @param afterTextChanged
      */
-    @BindingAdapter(value = {"app:beforeTextChangedEvent", "app:onTextChangedEvent", "app:afterTextChangedEvent"}, requireAll = false)
+    @BindingAdapter(value = {"beforeTextChangedEvent", "onTextChangedEvent", "afterTextChangedEvent"}, requireAll = false)
     public static void setEditTextEvent(final EditText view,
                                         final IEditTextEvent.IBeforeTextChanged beforeTextChanged,
                                         final IEditTextEvent.IOnTextChanged onTextChanged,
@@ -66,10 +65,5 @@ public class ViewBindingAdapter {
             view.addTextChangedListener(newValue);
         }
     }
-
-/*    @BindingAdapter("app:imgUrl")
-    public static void setImgUrl(ImageView imageView, IImageViewEvent.ILoadImage loadImage, String url) {
-        if (loadImage != null) loadImage.loadImage(imageView, url);
-    }*/
 
 }

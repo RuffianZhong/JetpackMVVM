@@ -1,0 +1,44 @@
+viewBinding
+1.自定义绑定适配器
+    //适配器
+    @BindingAdapter("afterTextChangedEvent")
+    public static void setEditTextEvent(final EditText view, final IEditTextEvent.IAfterTextChanged afterTextChanged) {}
+    //适配器参数
+    public interface IEditTextEvent {
+        public interface IAfterTextChanged {
+            public void afterTextChanged(EditText editText, Editable editable);
+        }
+    }
+    //自定义事件响应
+    public class LoginHandler {
+        public void afterTextChangedEvent(EditText editText, Editable editable, int i) {
+            LogUtils.e("editText:" + editText + "=====editable:" + editable.toString() + "======i:" + i);
+        }
+    }
+
+    1.1：Application namespace for attribute app:xx will be ignored.
+        错误表示自定义控件名称将会被覆盖，直接将 'aap:xx' 修改为 'xx' 可以解决报错，xml中使用不受限制，可以使用任意自定义控件名称
+    1.2：()->handler.someMethod()
+        '()' 表示(自定义)适配器中参数的回调函数方法签名(参数类型和个数) 例：'()' 表示 public void afterTextChanged(EditText editText, Editable editable);
+        'someMethod()' 表示自定义事件响应函数方法签名(参数类型和个数) 例：'someMethod()' 表示  public void afterTextChangedEvent(EditText editText, Editable editable, int i) {}
+    1.3：xml调用
+        1.3.1：直接在 app:afterTextChangedEvent="@{afterTextChanged}"
+        1.3.2：app:afterTextChangedEvent="@{(view,editable)->loginHandler.afterTextChangedEvent(view,editable,100)}"
+
+笔记快速查询
+https://juejin.cn/post/6844903549223059463
+https://juejin.cn/post/6844903549223059463#heading-16
+
+1.格式化
+<string name="string_format">名字: %s  性别: %s</string>
+android:text="@{@string/string_format(`吴彦祖`, `男`)}"
+2.引用其他控件
+  <TextView
+   android:id="@+id/datingName"
+   android:id="@+id/dating_name"
+   />
+  <TextView
+   android:text="@{datingName.text}"
+   />
+引用包含 _ 的控件id是可以直接忽略该符号. 例如tv_name直接写 tvName
+
