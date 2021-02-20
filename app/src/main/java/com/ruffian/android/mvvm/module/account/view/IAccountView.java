@@ -1,13 +1,12 @@
-package com.ruffian.android.mvvm.account.view;
+package com.ruffian.android.mvvm.module.account.view;
 
-import com.ruffian.android.mvvm.account.entity.UserBean;
+import com.ruffian.android.mvvm.module.account.entity.UserBean;
 import com.ruffian.android.mvvm.common.ICommonView;
 
 /**
  * IAccountView
  *
  * @author ZhongDaFeng
- * @date 2021/2/3 11:58
  */
 public interface IAccountView {
 

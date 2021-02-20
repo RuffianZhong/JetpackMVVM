@@ -5,7 +5,11 @@
 
         <variable
             name="mainView"
-            type="com.ruffian.android.mvvm.IMainView" />
+            type="com.ruffian.android.mvvm.module.main.view.IMainView" />
+
+        <variable
+            name="userViewModel"
+            type="com.ruffian.android.mvvm.module.account.viewmodel.UserViewModel" />
 
     </data>
 
@@ -44,9 +48,18 @@
 
             <include
                 layout="@layout/layout_main_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:mainView="@{mainView}" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <include
+            android:id="@+id/layout_user_info"
+            layout="@layout/layout_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|left"
+            app:userViewModel="@{userViewModel}" />
 
 
     </androidx.drawerlayout.widget.DrawerLayout>

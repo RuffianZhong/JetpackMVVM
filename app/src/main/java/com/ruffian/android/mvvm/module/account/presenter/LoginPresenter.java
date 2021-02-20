@@ -1,11 +1,11 @@
-package com.ruffian.android.mvvm.account.presenter;
+package com.ruffian.android.mvvm.module.account.presenter;
 
 import com.ruffian.android.framework.mvvm.model.IModelCallback;
 import com.ruffian.android.framework.mvvm.model.ModelFactory;
 import com.ruffian.android.framework.mvvm.presenter.MVVMPresenter;
-import com.ruffian.android.mvvm.account.entity.UserBean;
-import com.ruffian.android.mvvm.account.model.AccountModel;
-import com.ruffian.android.mvvm.account.view.IAccountView;
+import com.ruffian.android.mvvm.module.account.entity.UserBean;
+import com.ruffian.android.mvvm.module.account.model.AccountModel;
+import com.ruffian.android.mvvm.module.account.view.IAccountView;
 import com.ruffian.android.mvvm.loading.LoadingManager;
 
 /**
@@ -28,7 +28,10 @@ public class LoginPresenter extends MVVMPresenter<IAccountView.ILoginView> {
             @Override
             public void onSuccess(UserBean object) {
                 LoadingManager.get().dismissLoading();
-                if (isAttached()) getView().loginSuccess(object);
+                if (!isAttached()) return;
+
+                ModelFactory.getModel(AccountModel.class).saveUserLocalCache(getView().getActivity(), getView().getLifecycleOwner(), object);
+                getView().loginSuccess(object);
             }
 
             @Override

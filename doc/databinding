@@ -1,4 +1,4 @@
-viewBinding
+dataBinding
 1.自定义绑定适配器
     //适配器
     @BindingAdapter("afterTextChangedEvent")
@@ -41,4 +41,53 @@ android:text="@{@string/string_format(`吴彦祖`, `男`)}"
    android:text="@{datingName.text}"
    />
 引用包含 _ 的控件id是可以直接忽略该符号. 例如tv_name直接写 tvName
+3.绑定可观察数据
+3.1     public class UserBean extends BaseObservable {
+            String name;
+
+            @Bindable
+            public String getName() {
+                return name == null ? "" : name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+                notifyPropertyChanged(BR.name);
+            }
+        }
+在xml中直接使用 UserBean
+3.2
+    //UserBean
+    public class UserBean {
+        String name;
+
+        public String getName() {
+            return name == null ? "" : name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+    //UserViewModel
+    public class UserViewModel extends ViewModel {
+
+        private MutableLiveData<UserBean> userBeanLiveData;
+
+        public MutableLiveData<UserBean> getUserBean() {
+            if (userBeanLiveData == null) userBeanLiveData = new MutableLiveData<>();
+            return userBeanLiveData;
+        }
+
+    }
+    //activity 中设置生命周期对象
+      ((MainDataBinding) getViewDataBinding()).setUserViewModel(userViewModel);//在xml中使用 UserViewModel 而不是 UserBean
+      ((MainDataBinding) getViewDataBinding()).setLifecycleOwner(this);//设置生命周期对象 must
+    //获取数据成功后更新 ViewModel (就可以直接更新UI，而不用在 observe > onChanged(UserBean userBean) 中设置UI)
+      userViewModel.getUserBean().setValue(userBean);
+
+
+
+
+
 

@@ -26,10 +26,10 @@ public class RxJavaObservable {
     }
 
     /*订阅在主线程*/
-    public void observe() {
+    public void subscribe() {
         doOnDispose().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-               // .subscribe(rxJavaObserver);
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(rxJavaObserver);
     }
 
 }

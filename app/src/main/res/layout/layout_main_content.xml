@@ -5,7 +5,7 @@
 
         <variable
             name="mainView"
-            type="com.ruffian.android.mvvm.IMainView" />
+            type="com.ruffian.android.mvvm.module.main.view.IMainView" />
 
     </data>
 
@@ -18,67 +18,104 @@
 
         <FrameLayout
             android:id="@+id/layout_content"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1" />
 
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/radio_group_tab"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
+            android:gravity="center_vertical"
+            android:onCheckedChanged="@{(view,id)->mainView.onTabCheckedChanged(view,id)}"
             android:orientation="horizontal">
 
-            <com.ruffian.android.mvvm.customview.FooterTabView
+            <com.ruffian.library.widget.RRadioButton
                 android:id="@+id/tab_main"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{()->mainView.onTabClickEvent(0)}"
-                app:tab_icon_default="@mipmap/ic_launcher_round"
-                app:tab_icon_selected="@mipmap/ic_launcher"
-                app:tab_text="@string/m_main" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:checked="true"
+                android:drawablePadding="@dimen/dp_2"
+                android:gravity="center"
+                android:text="@string/m_main"
+                android:textSize="@dimen/sp_11"
+                app:icon_checked_top="@mipmap/ic_launcher_round"
+                app:icon_height_top="@dimen/dp_28"
+                app:icon_normal_top="@mipmap/ic_launcher"
+                app:icon_width_top="@dimen/dp_28"
+                app:text_color_checked="@color/colorAccent"
+                app:text_color_normal="@color/black" />
 
-            <com.ruffian.android.mvvm.customview.FooterTabView
+            <com.ruffian.library.widget.RRadioButton
                 android:id="@+id/tab_knowledge"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{()->mainView.onTabClickEvent(1)}"
-                app:tab_icon_default="@mipmap/ic_launcher_round"
-                app:tab_icon_selected="@mipmap/ic_launcher"
-                app:tab_text="@string/m_knowledge" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_2"
+                android:gravity="center"
+                android:text="@string/m_knowledge"
+                android:textSize="@dimen/sp_11"
+                app:icon_checked_top="@mipmap/ic_launcher_round"
+                app:icon_height_top="@dimen/dp_28"
+                app:icon_normal_top="@mipmap/ic_launcher"
+                app:icon_width_top="@dimen/dp_28"
+                app:text_color_checked="@color/colorAccent"
+                app:text_color_normal="@color/black" />
 
-            <com.ruffian.android.mvvm.customview.FooterTabView
+            <com.ruffian.library.widget.RRadioButton
                 android:id="@+id/tab_official_account"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{()->mainView.onTabClickEvent(2)}"
-                app:tab_icon_default="@mipmap/ic_launcher_round"
-                app:tab_icon_selected="@mipmap/ic_launcher"
-                app:tab_text="@string/m_official_account" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_2"
+                android:gravity="center"
+                android:text="@string/m_official_account"
+                android:textSize="@dimen/sp_11"
+                app:icon_checked_top="@mipmap/ic_launcher_round"
+                app:icon_height_top="@dimen/dp_28"
+                app:icon_normal_top="@mipmap/ic_launcher"
+                app:icon_width_top="@dimen/dp_28"
+                app:text_color_checked="@color/colorAccent"
+                app:text_color_normal="@color/black" />
 
-            <com.ruffian.android.mvvm.customview.FooterTabView
+            <com.ruffian.library.widget.RRadioButton
                 android:id="@+id/tab_navigation"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{()->mainView.onTabClickEvent(3)}"
-                app:tab_icon_default="@mipmap/ic_launcher_round"
-                app:tab_icon_selected="@mipmap/ic_launcher"
-                app:tab_text="@string/m_navigation" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_2"
+                android:gravity="center"
+                android:text="@string/m_navigation"
+                android:textSize="@dimen/sp_11"
+                app:icon_checked_top="@mipmap/ic_launcher_round"
+                app:icon_height_top="@dimen/dp_28"
+                app:icon_normal_top="@mipmap/ic_launcher"
+                app:icon_width_top="@dimen/dp_28"
+                app:text_color_checked="@color/colorAccent"
+                app:text_color_normal="@color/black" />
 
-            <com.ruffian.android.mvvm.customview.FooterTabView
+            <com.ruffian.library.widget.RRadioButton
                 android:id="@+id/tab_project"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{()->mainView.onTabClickEvent(4)}"
-                app:tab_icon_default="@mipmap/ic_launcher_round"
-                app:tab_icon_selected="@mipmap/ic_launcher"
-                app:tab_text="@string/m_project" />
-
-        </LinearLayout>
-
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:drawablePadding="@dimen/dp_2"
+                android:gravity="center"
+                android:text="@string/m_project"
+                android:textSize="@dimen/sp_11"
+                app:icon_checked_top="@mipmap/ic_launcher_round"
+                app:icon_height_top="@dimen/dp_28"
+                app:icon_normal_top="@mipmap/ic_launcher"
+                app:icon_width_top="@dimen/dp_28"
+                app:text_color_checked="@color/colorAccent"
+                app:text_color_normal="@color/black" />
+        </RadioGroup>
 
     </LinearLayout>
 </layout>

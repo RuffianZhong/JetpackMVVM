@@ -84,8 +84,8 @@ public class FooterTabView extends RRelativeLayout {
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.footerTabView);
         mTabIconDefault = attr.getResourceId(R.styleable.footerTabView_tab_icon_default, R.mipmap.ic_launcher);
         mTabIconSelected = attr.getResourceId(R.styleable.footerTabView_tab_icon_selected, mTabIconDefault);
-        mTabTextColorSelected = attr.getResourceId(R.styleable.footerTabView_tab_text_color_selected, R.color.black);
-        mTabTextColorDefault = attr.getResourceId(R.styleable.footerTabView_tab_text_color_default, R.color.black_70);
+        mTabTextColorSelected = attr.getResourceId(R.styleable.footerTabView_tab_text_color_selected, R.color.colorAccent);
+        mTabTextColorDefault = attr.getResourceId(R.styleable.footerTabView_tab_text_color_default, R.color.black);
         mTabChecked = attr.getBoolean(R.styleable.footerTabView_tab_checked, false);
         mTabText = attr.getString(R.styleable.footerTabView_tab_text);
         footView = View.inflate(context, R.layout.layout_footer_tab, null);

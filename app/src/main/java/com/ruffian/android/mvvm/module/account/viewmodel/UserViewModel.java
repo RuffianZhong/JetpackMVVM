@@ -1,16 +1,16 @@
-package com.ruffian.android.mvvm.account.viewmodel;
+package com.ruffian.android.mvvm.module.account.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ruffian.android.mvvm.account.entity.UserBean;
+import com.ruffian.android.mvvm.module.account.entity.UserBean;
 
 /**
- * 登录ViewModel
+ * UserViewModel
  *
  * @author ZhongDaFeng
  */
-public class LoginViewModel extends ViewModel {
+public class UserViewModel extends ViewModel {
 
     private MutableLiveData<UserBean> userBeanLiveData;
 

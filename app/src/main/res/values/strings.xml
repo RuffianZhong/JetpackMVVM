@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">MVVM</string>
+    <string name="placeholder">--</string>
     <string name="hint_account">请输入账号</string>
     <string name="hint_psw">请输入密码</string>
     <string name="login">登录</string>
@@ -9,4 +10,6 @@
     <string name="m_navigation">导航</string>
     <string name="m_project">项目</string>
     <string name="tips_exit_confirm">再次点击退出应用</string>
+    <string name="me_collection">我的收藏</string>
+    <string name="me_todo">TODO</string>
 </resources>

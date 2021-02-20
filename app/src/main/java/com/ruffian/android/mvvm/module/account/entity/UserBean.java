@@ -1,4 +1,4 @@
-package com.ruffian.android.mvvm.account.entity;
+package com.ruffian.android.mvvm.module.account.entity;
 
 import com.google.gson.annotations.SerializedName;
 

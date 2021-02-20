@@ -5,7 +5,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.util.Log;
 
-import com.ruffian.android.mvvm.MainActivity;
+import com.ruffian.android.mvvm.module.main.activity.MainActivity;
 
 import java.util.Stack;
 

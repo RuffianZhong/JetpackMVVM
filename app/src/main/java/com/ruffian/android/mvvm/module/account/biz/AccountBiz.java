@@ -1,4 +1,4 @@
-package com.ruffian.android.mvvm.account.biz;
+package com.ruffian.android.mvvm.module.account.biz;
 
 
 import androidx.lifecycle.LifecycleOwner;
@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner;
 import com.ruffian.android.framework.http.HttpCallback;
 import com.ruffian.android.framework.http.RHttp;
 import com.ruffian.android.mvvm.common.Response;
-import com.ruffian.android.mvvm.account.entity.UserBean;
+import com.ruffian.android.mvvm.module.account.entity.UserBean;
 import com.ruffian.android.mvvm.common.BaseBiz;
 
 import java.util.TreeMap;

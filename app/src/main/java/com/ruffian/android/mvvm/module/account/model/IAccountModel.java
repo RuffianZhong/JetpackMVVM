@@ -1,4 +1,4 @@
-package com.ruffian.android.mvvm.account.model;
+package com.ruffian.android.mvvm.module.account.model;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.ruffian.android.framework.mvvm.model.IModel;
 import com.ruffian.android.framework.mvvm.model.IModelCallback;
-import com.ruffian.android.mvvm.account.entity.UserBean;
+import com.ruffian.android.mvvm.module.account.entity.UserBean;
 
 /**
  * IAccountModel

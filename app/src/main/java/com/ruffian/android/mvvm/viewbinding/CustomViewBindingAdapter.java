@@ -3,11 +3,13 @@ package com.ruffian.android.mvvm.viewbinding;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.adapters.ListenerUtil;
 
 import com.ruffian.android.mvvm.R;
+import com.ruffian.android.mvvm.utils.ImageLoaderUtils;
 
 /**
  * 自定义ViewBindingAdapter
@@ -65,5 +67,11 @@ public class CustomViewBindingAdapter {
             view.addTextChangedListener(newValue);
         }
     }
+
+    @BindingAdapter("imageUrl")
+    public static void setImageURL(ImageView view, String url) {
+        ImageLoaderUtils.load(view.getContext(), view, url);
+    }
+
 
 }

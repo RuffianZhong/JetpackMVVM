@@ -3,7 +3,7 @@ package com.ruffian.android.mvvm.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.ruffian.android.mvvm.account.LoginActivity;
+import com.ruffian.android.mvvm.module.account.activity.LoginActivity;
 import com.ruffian.android.mvvm.common.ActivityManager;
 
 /**

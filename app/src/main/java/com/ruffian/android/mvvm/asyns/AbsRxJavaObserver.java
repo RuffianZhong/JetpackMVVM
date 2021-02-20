@@ -18,16 +18,14 @@ import io.reactivex.disposables.Disposable;
  *
  * @author ZhongDaFeng
  */
-public class RxJavaObserver<T> implements Observer<T>, IAsyncCancel, LifecycleObserver {
+public class AbsRxJavaObserver<T>  implements IAsyncObserver<T>, IAsyncCancel, LifecycleObserver {
 
     /*请求标识*/
     private String mDisposableTag;
+    // private Observer<T> mObserver;
 
-    public RxJavaObserver(LifecycleOwner lifecycleOwner) {
-        this("", lifecycleOwner);
-    }
-
-    public RxJavaObserver(String disposableTag, LifecycleOwner lifecycleOwner) {
+    public AbsRxJavaObserver(String disposableTag, Observer<T> observer, LifecycleOwner lifecycleOwner) {
+        //  this.mObserver = observer;
         setDisposableTag(disposableTag);
         bindLifecycleOwner(lifecycleOwner);
     }
@@ -35,20 +33,24 @@ public class RxJavaObserver<T> implements Observer<T>, IAsyncCancel, LifecycleOb
     @Override
     public void onError(Throwable e) {
         AsyncManager.get().removeDisposable(mDisposableTag);
+        //  mObserver.onError(e);
     }
 
     @Override
     public void onComplete() {
+        //  mObserver.onComplete();
     }
 
     @Override
     public void onNext(@NonNull T value) {
         AsyncManager.get().removeDisposable(mDisposableTag);
+        //   mObserver.onNext(value);
     }
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
         AsyncManager.get().addDisposable(mDisposableTag, d);
+        //  mObserver.onSubscribe(d);
     }
 
 
