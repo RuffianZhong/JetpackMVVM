@@ -22,12 +22,14 @@ public class MVVMLifecycle<V extends IView, P extends IPresenter<V>> implements 
     public MVVMLifecycle(LifecycleOwner lifecycleOwner, IMVVMDelegate<V, P> mvvmDelegate) {
         this.mMVVMDelegate = mvvmDelegate;
         bindLifecycleOwner(lifecycleOwner);
+        onCreate();
     }
 
     /**
      * 创建回调，添加绑定
+     * 备注：Lifecycle.Event.ON_CREATE 在 onCreate 函数之后，导致 onCreate 中无法正常使用
      */
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    //@OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onCreate() {
         if (mMVVMDelegate == null) return;
         /**

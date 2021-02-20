@@ -83,7 +83,6 @@ public class DBHelper {
         int count = 0;
         if (db != null) {
             count = db.delete(var1);
-            LogUtils.e("count======" + count);
         }
         return count;
     }
