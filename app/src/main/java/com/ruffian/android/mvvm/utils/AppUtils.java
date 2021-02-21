@@ -3,8 +3,8 @@ package com.ruffian.android.mvvm.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.ruffian.android.mvvm.module.account.activity.LoginActivity;
 import com.ruffian.android.mvvm.common.ActivityManager;
+import com.ruffian.android.mvvm.module.account.activity.LoginActivity;
 
 /**
  * AppUtils
@@ -23,7 +23,13 @@ public class AppUtils {
 
     public static void exit() {
         ActivityManager.get().finishAllActivity();//close activity
-        Runtime.getRuntime().exit(0); // Kill kill kill!
+        try {
+            android.os.Process.killProcess(android.os.Process.myPid());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        //System.exit(0);
+        //Runtime.getRuntime().exit(0); // Kill kill kill!
     }
 
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+    <data class="MeDataBinding">
 
         <variable
             name="userViewModel"
@@ -9,8 +11,8 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
@@ -18,19 +20,9 @@
         <View
             android:id="@+id/view_bg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            app:layout_constraintBottom_toTopOf="@id/tv_my_collection" />
-
-        <com.ruffian.library.widget.RImageView
-            android:id="@+id/iv_user_icon"
-            android:layout_width="@dimen/dp_65"
-            android:layout_height="@dimen/dp_65"
-            android:layout_marginTop="@dimen/dp_65"
-            app:imageUrl="@{userViewModel.userBean.icon}"
-            app:is_circle="true"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_height="@dimen/dp_0"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/tv_my_collection"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -44,7 +36,20 @@
             android:text="@{userViewModel.userBean.nickname??@string/placeholder}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_user_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_icon"
+            tools:text="@string/placeholder" />
+
+        <com.ruffian.library.widget.RImageView
+            android:id="@+id/iv_user_icon"
+            android:layout_width="@dimen/dp_65"
+            android:layout_height="@dimen/dp_65"
+            android:layout_marginTop="@dimen/dp_65"
+            app:imageUrl="@{userViewModel.userBean.icon}"
+            app:is_circle="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
 
         <com.ruffian.library.widget.RTextView
             android:id="@+id/tv_my_collection"
@@ -80,4 +85,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

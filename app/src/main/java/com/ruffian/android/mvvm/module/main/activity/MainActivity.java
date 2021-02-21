@@ -5,65 +5,45 @@ import android.view.KeyEvent;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.ruffian.android.framework.http.utils.LogUtils;
 import com.ruffian.android.mvvm.R;
 import com.ruffian.android.mvvm.common.BaseActivity;
 import com.ruffian.android.mvvm.databinding.MainDataBinding;
-import com.ruffian.android.mvvm.module.account.entity.UserBean;
-import com.ruffian.android.mvvm.module.account.viewmodel.UserViewModel;
 import com.ruffian.android.mvvm.module.main.fragment.ModuleKnowledgeFragment;
 import com.ruffian.android.mvvm.module.main.fragment.ModuleMainFragment;
-import com.ruffian.android.mvvm.module.main.fragment.ModuleNavigationFragment;
+import com.ruffian.android.mvvm.module.main.fragment.ModuleMeFragment;
 import com.ruffian.android.mvvm.module.main.fragment.ModuleOfficialAccountFragment;
 import com.ruffian.android.mvvm.module.main.fragment.ModuleProjectFragment;
-import com.ruffian.android.mvvm.module.main.presenter.MainPresenter;
 import com.ruffian.android.mvvm.module.main.view.IMainView;
 import com.ruffian.android.mvvm.utils.AppUtils;
 
-public class MainActivity extends BaseActivity<IMainView, MainPresenter> implements IMainView {
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+public class MainActivity extends BaseActivity implements IMainView {
 
     private static final String KEY_TAG = "fragment_tag";
     private final String[] mFragmentTags = new String[]{"fragment_tags_0", "fragment_tags_1", "fragment_tags_2", "fragment_tags_3", "fragment_tags_4"};
 
     private Bundle mSavedInstanceState;
 
-    private int mCachePosition = 0;
+    private int mCachePosition = -1;
     private ModuleMainFragment mainFragment;
     private ModuleKnowledgeFragment knowledgeFragment;
     private ModuleOfficialAccountFragment officialAccountFragment;
-    private ModuleNavigationFragment navigationFragment;
+    private ModuleMeFragment meFragment;
     private ModuleProjectFragment projectFragment;
 
     //上次回退事件时间
     private long mLastBackEventTime = 0;
     private static final long TARGET_EXIT_TIME = 1000L;
 
-    private UserViewModel userViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mSavedInstanceState = savedInstanceState;
-        //viewModel
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-       /* userViewModel.getUserBean().observe(this, new Observer<UserBean>() {
-            @Override
-            public void onChanged(UserBean userBean) {
-                //userBean变化了   // update UI
-                //LogUtils.e("==========userBean变化了==========");
-                //((MainDataBinding) getViewDataBinding()).setUserBean(userViewModel.getUserBean().getValue());
-            }
-        });*/
-
 
         getViewDataBinding().setLifecycleOwner(this);
-        ((MainDataBinding) getViewDataBinding()).setUserViewModel(userViewModel);
         ((MainDataBinding) getViewDataBinding()).setMainView(this);
-        init();
         initShowTabView();
     }
 
@@ -85,10 +65,6 @@ public class MainActivity extends BaseActivity<IMainView, MainPresenter> impleme
         showTabView(mCachePosition);
     }
 
-    private void init() {
-        getMVVMPresenter().getUserBean();
-    }
-
     private void initShowTabView() {
         if (mSavedInstanceState != null) { //Activity被重新创建
             mCachePosition = mSavedInstanceState.getInt(KEY_TAG);
@@ -96,14 +72,15 @@ public class MainActivity extends BaseActivity<IMainView, MainPresenter> impleme
             mainFragment = (ModuleMainFragment) fragmentManager.findFragmentByTag(mFragmentTags[0]);
             knowledgeFragment = (ModuleKnowledgeFragment) fragmentManager.findFragmentByTag(mFragmentTags[1]);
             officialAccountFragment = (ModuleOfficialAccountFragment) fragmentManager.findFragmentByTag(mFragmentTags[2]);
-            navigationFragment = (ModuleNavigationFragment) fragmentManager.findFragmentByTag(mFragmentTags[3]);
+            meFragment = (ModuleMeFragment) fragmentManager.findFragmentByTag(mFragmentTags[3]);
             projectFragment = (ModuleProjectFragment) fragmentManager.findFragmentByTag(mFragmentTags[4]);
         }
-        showTabView(mCachePosition);
+        showTabView(0);
     }
 
     private void showTabView(int position) {
         if (mCachePosition == position) return;
+        if (mCachePosition == -1) mCachePosition = 0;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideTabViews(transaction);
         switch (position) {
@@ -131,20 +108,20 @@ public class MainActivity extends BaseActivity<IMainView, MainPresenter> impleme
                     transaction.show(officialAccountFragment);
                 }
                 break;
-            case 3://ModuleNavigationFragment
-                if (navigationFragment == null) {
-                    navigationFragment = new ModuleNavigationFragment();
-                    transaction.add(R.id.layout_content, navigationFragment, mFragmentTags[position]);
-                } else {
-                    transaction.show(navigationFragment);
-                }
-                break;
-            case 4://ModuleProjectFragment
+            case 3://ModuleProjectFragment
                 if (projectFragment == null) {
                     projectFragment = new ModuleProjectFragment();
                     transaction.add(R.id.layout_content, projectFragment, mFragmentTags[position]);
                 } else {
                     transaction.show(projectFragment);
+                }
+                break;
+            case 4://ModuleMeFragment
+                if (meFragment == null) {
+                    meFragment = new ModuleMeFragment();
+                    transaction.add(R.id.layout_content, meFragment, mFragmentTags[position]);
+                } else {
+                    transaction.show(meFragment);
                 }
                 break;
         }
@@ -157,7 +134,7 @@ public class MainActivity extends BaseActivity<IMainView, MainPresenter> impleme
             if (mainFragment != null) transaction.hide(mainFragment);
             if (knowledgeFragment != null) transaction.hide(knowledgeFragment);
             if (officialAccountFragment != null) transaction.hide(officialAccountFragment);
-            if (navigationFragment != null) transaction.hide(navigationFragment);
+            if (meFragment != null) transaction.hide(meFragment);
             if (projectFragment != null) transaction.hide(projectFragment);
         }
     }
@@ -190,26 +167,14 @@ public class MainActivity extends BaseActivity<IMainView, MainPresenter> impleme
             case R.id.tab_official_account:
                 position = 2;
                 break;
-            case R.id.tab_navigation:
+            case R.id.tab_project:
                 position = 3;
                 break;
-            case R.id.tab_project:
+            case R.id.tab_me:
                 position = 4;
                 break;
         }
         showTabView(position);
-    }
-
-    @Override
-    public void onUserInfoGot(UserBean userBean) {
-        //((MainDataBinding) getViewDataBinding()).setUserBean(userBean);
-        //更新 ViewModel (系统将会回调onChanged/直接更新UI)
-        userViewModel.getUserBean().setValue(userBean);
-    }
-
-    @Override
-    public MainPresenter makePresenter() {
-        return new MainPresenter();
     }
 
 }
