@@ -4,7 +4,7 @@
 
 ### MVVM：框架源码 framework_mvvm 
 
-### Http：框架源码 framework_http retrofit+okhttp+rxjava
+### Http：框架源码 framework_http (基于retrofit+okhttp+rxjava封装)
 
 ### app: 项目实践源码
 
