@@ -10,9 +10,9 @@
 - 支持表单格式，String，json格式数据提交请求
 
 
-#### 1.全局配置
+### 1.全局配置
 
-初始化 RHttp 必须调用 **init**
+`初始化 RHttp 必须调用 init `
 
 ```
 public class RApp extends Application {
@@ -28,7 +28,7 @@ public class RApp extends Application {
 }
 ```
 
-Configure 配置参数说明
+`Configure 配置参数说明`
 
 ```
         RHttp.Configure.get()
@@ -42,9 +42,9 @@ Configure 配置参数说明
 ```
 
 
-#### 2.使用Http请求
+### 2.使用Http请求
 
-##### 2.1 RHttp api接口说明
+### 2.1 RHttp api接口说明
 ```
         RHttp http = new RHttp.Builder()
                 .post()//请求方式
@@ -69,13 +69,13 @@ Configure 配置参数说明
         http.execute(new UploadCallback<Object>() {});//携带文件上传请求
         
 ```
-##### 2.2 RHttp 数据解析，以及回调逻辑说明
-###### 2.2.1 RHttp 框架处理最终回调
+### 2.2 RHttp 数据解析，以及回调逻辑说明
+### 2.2.1 RHttp 框架处理最终回调
 
 > RHttp将接口逻辑失败的情况直接回调 onError(int code,String msg);
 > 何时认为接口逻辑失败？需要开发者告诉框架，实现 IResponse 接口
 
-IResponse.java
+`IResponse.java`
 
 ```
 /**
@@ -112,7 +112,8 @@ public interface IResponse {
 ```
 
 开发者将需要解析的数据实体，实现 IResponse 接口
-Response.java
+
+`Response.java`
 ```
 /**
  * 解析接口响应实体类 : HttpCallback<T>
@@ -189,7 +190,7 @@ public class Response<T> implements Serializable, IResponse {
     }
 }
 ```
-此时请求使用示例
+`此时请求使用示例`
 ```
         new RHttp.Builder()
                 .post()
@@ -214,7 +215,7 @@ public class Response<T> implements Serializable, IResponse {
                 });
 ```
 
-###### 2.2.2 开发者自行实现回调逻辑
+### 2.2.2 开发者自行实现回调逻辑
 
 不必实现 IResponse 接口，可以传递任意能够正常解析的对象。例如 String, JSONObject, JSONArray, 其他实体类
 但此时只要网络请求成功就会将源数据回调 onSuccess(),开发者需要自行处理逻辑失败的情况
@@ -254,9 +255,9 @@ public class Response<T> implements Serializable, IResponse {
 
 ```
 
-##### 2.3 RHttp 上传文件使用示例
+### 2.3 RHttp 上传文件使用示例
 
-UploadCallback<T>回调接口说明
+`UploadCallback<T>回调接口说明`
 
 ```
 public interface UploadCallback<T> extends HttpCallback<T> {
@@ -274,7 +275,7 @@ public interface UploadCallback<T> extends HttpCallback<T> {
 }
 ```
 
-使用示例
+`使用示例`
 
 ```
         //Header参数
@@ -322,9 +323,9 @@ public interface UploadCallback<T> extends HttpCallback<T> {
                 });
 ```
 
-#### 3.使用 RDownload 下载
+### 3.使用 RDownload 下载
 
-##### 3.1 RDownload api接口说明
+### 3.1 RDownload api接口说明
 
 ```
         RDownLoad.get().startDownload(new Download());//开始下载
@@ -334,7 +335,7 @@ public interface UploadCallback<T> extends HttpCallback<T> {
         RDownLoad.get().removeDownload(new Download(), true);//删除下载
 ```
 
-##### 3.2 Download 实体类说明
+### 3.2 Download 实体类说明
 ```
 @Table("download")
 public class Download implements Serializable {
@@ -389,7 +390,7 @@ public class Download implements Serializable {
     }
 }
 ```
-拓展下载实体类  使用框架的 `Download` 或者其子类
+`拓展下载实体类  使用框架的 Download 或者其子类`
 
 ```
     public class DownloadApk extends Download {
@@ -409,7 +410,7 @@ public class Download implements Serializable {
     }
 ```
 
-##### 3.3 构建下载
+### 3.3 构建下载
 
 ```
         //文件存储路径和名称
