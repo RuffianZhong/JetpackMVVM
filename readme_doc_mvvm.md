@@ -1,60 +1,4 @@
-# JetpackMVVM
-
-## 欢迎关注 本项目采用 MVVM+Jetpack+组件化模式架构
-
-### 说明
-
-> 本项目使用 MVVM 模式架构，使用 Jetpack 组件实现，功能代码实现组件化，目标是编写一个 玩安卓 客户端
-> 
-> 目前 MVVM 框架已经完成，Http 框架已经完成。玩安卓客户端功能代码正在进行中，组件化将在基础功能实现之后完成，请持续关注。。。
-> 
-
-## Http  框架源码查看模块 framework_http 【[详细文档](https://github.com/RuffianZhong/JetpackMVVM/blob/master/readme_doc_http.md)】
-
-> RHttp 是基于 Retrofit2 + OkHttp3 + RxJava2 +Lifecycle 封装的网络请求框架
-
-- 基本的get、post、put、delete、4种请求
-- 单/多文件上传
-- 断点续传下载
-- 支持手动取消网络请求
-- 绑定组件生命周期自动管理网络请求
-- 支持表单格式，String，json格式数据提交请求
-
-##### RHttp-初始化(必须)
-```
-        //初始化RHttp(必须)
-        RHttp.Configure.get().init(this);
-```
-##### RHttp-使用
-```
-        new RHttp.Builder()
-                .baseUrl("https://www.wanandroid.com/")
-                .post()
-                .apiUrl("user/login")//接口地址
-                .addParameter(new TreeMap<String, Object>())//参数
-                .addHeader(new TreeMap<String, Object>())//请求头
-                .lifecycle(this)//自动管理生命周期
-                .tag("login_tag")//请求唯一标识,后续根据tag取消请求
-                .build()
-                .execute(new HttpCallback<Response<UserBean>>() {
-                    @Override
-                    public void onSuccess(Response<UserBean> object) {
-                        //请求成功
-                    }
-
-                    @Override
-                    public void onError(int code, String msg) {
-                        //请求失败
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        //请求取消
-                    }
-                });
-```
-
-### MVVM 框架源码查看 framework_mvvm  【[详细文档](https://github.com/RuffianZhong/JetpackMVVM/blob/master/readme_doc_mvvm.md)】
+### 1.MVVM
 
 在 Android 项目中理解
 
@@ -70,6 +14,28 @@ Presenter 作为桥梁连接 View 和 Model，解耦模块。 主要职责绑定
 
 >作者认为 P 层不适合只绑定单个 Model 因此在 P 层中并没有对 Model 进行绑定，而是在具体 Presenter 中创建所需要的 Model
 >
+
+IPresenter.java
+
+```
+public interface IPresenter<V extends IView> {
+
+    /**
+     * 将 View 添加到当前 Presenter
+     */
+    @UiThread
+    void attachView(@NonNull V view);
+
+    /**
+     * 将 View 从 Presenter 移除
+     */
+    @UiThread
+    void detachView();
+
+}
+```
+
+MVVMPresenter<V extends IView>
 
 ```
 //Presenter
@@ -107,6 +73,11 @@ public class MVVMPresenter<V extends IView> implements IPresenter<V> {
         return mView != null;
     }
 }
+```
+
+具体业务Presenter
+
+```
 //具体业务Presenter
 public class LoginPresenter extends MVVMPresenter<ILoginView> {
 
@@ -148,9 +119,20 @@ ILoginView 是什么？
 
 > Activity/Fragment 被定位成 View，实现View接口，而 Presenter 则充当了之前的 控制器 角色，处理各种逻辑，然后调用 View 接口定义的函数 （此时只是调用接口定义，具体的实现在 Activity/Fragment ）
 >
+
+IView.java
+
 ```
-    //基础View接口，可以是空内容，此处添加了两个常用的函数定义
-    public interface IMVVMView {
+public interface IView {
+
+}
+```
+
+IMVVMView.java
+
+```
+    //基础View接口，此处添加了两个常用的函数定义
+    public interface IMVVMView extends IView {
         /**
          * LifecycleOwner
          */
@@ -161,15 +143,23 @@ ILoginView 是什么？
          */
         Activity getActivity();
     }
-    
-    //具体业务View接口定义，按需实现
+```
+
+具体业务View接口定义，按需实现
+
+```
+ //具体业务View接口定义，按需实现
     public interface ILoginView extends IMVVMView {
         //登录成功
         public void loginSuccess(UserBean userBean);
         //登录失败
         public void onError(int code, String desc);
     }
-    
+```
+
+Activity/Fragment 中实现View接口
+
+```
     //Activity/Fragment 中实现View接口
     public class LoginActivity extends BaseActivity implements ILoginView {
 
@@ -184,6 +174,7 @@ ILoginView 是什么？
         }
     }
 ```
+
 > 上述代码可以看出，View 只负责处理 UI ，何时处理？数据怎么来？都交由 Presenter 完成。职责很单一
 
 ### Model
@@ -217,6 +208,11 @@ public interface IModelCallback {
         public void onSuccess(T object);
     }
 }
+```
+
+具体业务Model(实现方式没有规定，合理构造数据即可)
+
+```
 //具体业务Model(实现方式没有规定，合理构造数据即可)
 public class AccountModel {
     /**
@@ -246,13 +242,14 @@ public class AccountModel {
     }
 }
 ```
+
 > Model 负责构造数据传递给调用者（Presenter）,在没有 P 层的MVC 中可能就直接回调给 V 层，从而导致 V / M 耦合不易维护
 > IModelCallback 只是为了规范和便于维护添加的一层回调
 
 ### ViewModel
 这里没有对 ViewModel 进行任何封装，在 MVP 的模式下使用 Jetpack 提供的 ViewModel 将 特定的 ViewModel 直接绑定到 View
 
-#### MVVM 使用
+###  2.MVVM 使用
 ###### View 接口定义
 ```
 /**
@@ -422,15 +419,3 @@ public class UserViewModel extends ViewModel {
 
 </layout>
 ```
-
-
-#### 鸣谢 [泓洋大佬开放的玩安卓平台](https://www.wanandroid.com/index)  
-
-## License
-
-```
-MIT License
-
-Copyright (c) 2021 Ruffian-痞子
-```
-
