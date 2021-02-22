@@ -9,4 +9,5 @@ public interface IDisposableCancel {
 
     public void cancel();
 
+    public boolean isCanceled();
 }

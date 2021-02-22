@@ -67,10 +67,14 @@ public class HttpObserver<T> implements Observer<String>, IDisposableCancel, Lif
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     @Override
     public void cancel() {
-        boolean isDisposed = DisposableManager.get().isDisposed(mDisposableTag);
         //如果没有移除，此时走取消逻辑
-        if (!isDisposed) if (mHttpResult != null) mHttpResult.onCancel();
+        if (!isCanceled()) if (mHttpResult != null) mHttpResult.onCancel();
         DisposableManager.get().removeDisposable(mDisposableTag);
+    }
+
+    @Override
+    public boolean isCanceled() {
+        return DisposableManager.get().isDisposed(mDisposableTag);
     }
 
     /**

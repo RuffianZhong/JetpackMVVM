@@ -66,6 +66,8 @@ public class RHttp {
     private long timeout;
     /*时间单位*/
     private TimeUnit timeUnit;
+    /*HttpObserver便于取消*/
+    private HttpObserver httpObserver;
 
 
     /*构造函数*/
@@ -108,25 +110,15 @@ public class RHttp {
 
     /*取消网络请求*/
     public void cancel() {
-       /* if (httpCallback != null) {
-            httpCallback.cancel();
-        }
-        if (uploadCallback != null) {
-            uploadCallback.cancel();
-        }*/
+        if (httpObserver != null)
+            httpObserver.cancel();
     }
 
     /*请求是否已经取消*/
     public boolean isCanceled() {
-      /*  boolean isCanceled = true;
-        if (httpCallback != null) {
-            isCanceled = httpCallback.isDisposed();
-        }
-        if (uploadCallback != null) {
-            isCanceled = uploadCallback.isDisposed();
-        }
-        return isCanceled;*/
-        return false;
+        if (httpObserver != null)
+            return httpObserver.isCanceled();
+        return true;
     }
 
     /**
@@ -159,7 +151,7 @@ public class RHttp {
         Observable apiObservable = disposeApiObservable();
 
         /*构造 观察者*/
-        HttpObserver httpObserver = new HttpObserver(tag, httpResult, lifecycleOwner);
+        httpObserver = new HttpObserver(tag, httpResult, lifecycleOwner);
 
         /*构造 被观察者*/
         HttpObservable httpObservable = new HttpObservable(apiObservable, httpObserver);
@@ -197,7 +189,7 @@ public class RHttp {
         Observable apiObservable = RetrofitUtils.get().getRetrofit(getBaseUrl(), getTimeout(), getTimeUnit()).create(APIService.class).upload(disposeApiUrl(), parameter, header, fileList);
 
         /*构造 观察者*/
-        HttpObserver httpObserver = new HttpObserver(tag, uploadResult, lifecycleOwner);
+        httpObserver = new HttpObserver(tag, uploadResult, lifecycleOwner);
 
         /*构造 被观察者*/
         HttpObservable httpObservable = new HttpObservable(apiObservable, httpObserver);
