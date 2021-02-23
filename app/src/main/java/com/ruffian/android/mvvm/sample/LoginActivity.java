@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.ruffian.android.mvvm.R;
 import com.ruffian.android.mvvm.common.BaseActivity;
-import com.ruffian.android.mvvm.databinding.LoginDataBinding;
+import com.ruffian.android.mvvm.databinding.SampleLoginDataBinding;
 
 /**
  * LoginActivity
@@ -17,7 +17,7 @@ import com.ruffian.android.mvvm.databinding.LoginDataBinding;
 public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter> implements ILoginView {
 
     private UserViewModel userViewModel;
-    private LoginDataBinding dataBinding;
+    private SampleLoginDataBinding dataBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
