@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ruffian.android.mvvm.R;
@@ -14,7 +15,7 @@ import com.ruffian.android.mvvm.databinding.SampleLoginDataBinding;
 /**
  * LoginActivity
  */
-public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter> implements ILoginView {
+public class LoginActivity extends BaseActivity<ILoginView, LoginPresenter, ViewDataBinding> implements ILoginView {
 
     private UserViewModel userViewModel;
     private SampleLoginDataBinding dataBinding;

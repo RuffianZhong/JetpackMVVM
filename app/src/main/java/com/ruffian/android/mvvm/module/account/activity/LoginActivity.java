@@ -7,13 +7,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ruffian.android.mvvm.module.main.activity.MainActivity;
 import com.ruffian.android.mvvm.R;
+import com.ruffian.android.mvvm.common.BaseActivity;
+import com.ruffian.android.mvvm.databinding.LoginDataBinding;
 import com.ruffian.android.mvvm.module.account.entity.UserBean;
 import com.ruffian.android.mvvm.module.account.presenter.LoginPresenter;
 import com.ruffian.android.mvvm.module.account.view.IAccountView;
-import com.ruffian.android.mvvm.common.BaseActivity;
-import com.ruffian.android.mvvm.databinding.LoginDataBinding;
+import com.ruffian.android.mvvm.module.main.activity.MainActivity;
 import com.ruffian.android.mvvm.utils.IntentUtils;
 
 /**
@@ -21,7 +21,7 @@ import com.ruffian.android.mvvm.utils.IntentUtils;
  *
  * @author ZhongDaFeng
  */
-public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPresenter> implements IAccountView.ILoginView {
+public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPresenter, LoginDataBinding> implements IAccountView.ILoginView {
 
 
     @Override
@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //dataBinding
-        ((LoginDataBinding) getViewDataBinding()).setLoginView(this);
+        getViewDataBinding().setLoginView(this);
     }
 
     @Override
@@ -45,6 +45,7 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
     @Override
     public void loginSuccess(UserBean userBean) {
         IntentUtils.startActivity(this, MainActivity.class);
+        finish();
     }
 
     @Override

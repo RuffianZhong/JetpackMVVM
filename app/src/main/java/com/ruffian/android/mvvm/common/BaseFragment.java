@@ -13,13 +13,14 @@ import androidx.databinding.ViewDataBinding;
 import com.ruffian.android.framework.mvvm.component.MVVMFragment;
 import com.ruffian.android.framework.mvvm.presenter.IPresenter;
 import com.ruffian.android.framework.mvvm.view.IMVVMView;
+import com.ruffian.android.framework.mvvm.viewmodel.IBinding;
 
 /**
  * BaseFragment
  *
  * @author ZhongDaFeng
  */
-public abstract class BaseFragment<V extends IMVVMView, P extends IPresenter<V>> extends MVVMFragment<V, P> {
+public abstract class BaseFragment<V extends IMVVMView, P extends IPresenter<V>, T extends ViewDataBinding> extends MVVMFragment<V, P> implements IBinding<T> {
 
     private View mView;
     private ViewDataBinding mViewDataBinding;
@@ -65,8 +66,8 @@ public abstract class BaseFragment<V extends IMVVMView, P extends IPresenter<V>>
      *
      * @return
      */
-    public ViewDataBinding getViewDataBinding() {
-        return mViewDataBinding;
+    public T getViewDataBinding() {
+        return (T) mViewDataBinding;
     }
 
     /**

@@ -3,6 +3,11 @@ package com.ruffian.android.mvvm.module.main.fragment;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.ruffian.android.framework.http.utils.LogUtils;
 import com.ruffian.android.mvvm.R;
 import com.ruffian.android.mvvm.common.BaseFragment;
@@ -12,28 +17,24 @@ import com.ruffian.android.mvvm.module.main.adapter.ArticleAdapter;
 import com.ruffian.android.mvvm.module.main.entity.ArticleBean;
 import com.ruffian.android.mvvm.module.main.presenter.ArticlePresenter;
 import com.ruffian.android.mvvm.module.main.view.IArticleView;
+import com.ruffian.android.mvvm.module.main.viewmodel.ArticleViewModel;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 /**
  * MainFragment
  *
  * @author ZhongDaFeng
  */
-public class ModuleMainFragment extends BaseFragment<IArticleView, ArticlePresenter> implements IArticleView {
-
+public class ModuleMainFragment extends BaseFragment<IArticleView, ArticlePresenter, FmtMainDataBinding> implements IArticleView {
 
     private int mPageIndex = 0;//分页下标
     private ArrayList<ArticleBean> mList = new ArrayList<>();
     private ArticleAdapter articleAdapter;
-
+    private ArticleViewModel articleViewModel;
 
     @Override
     protected int layoutId() {
@@ -43,8 +44,9 @@ public class ModuleMainFragment extends BaseFragment<IArticleView, ArticlePresen
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        articleViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
         init();
-        getMVVMPresenter().getArticleList(mPageIndex);
+        initArticleList();
     }
 
     private void init() {
@@ -55,7 +57,6 @@ public class ModuleMainFragment extends BaseFragment<IArticleView, ArticlePresen
         LinearSpaceDecoration decoration = new LinearSpaceDecoration(10);
         getViewDataBinding().recyclerView.addItemDecoration(decoration);
         getViewDataBinding().recyclerView.setAdapter(articleAdapter);
-
 
         getViewDataBinding().refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -73,10 +74,12 @@ public class ModuleMainFragment extends BaseFragment<IArticleView, ArticlePresen
         });
     }
 
-
-    @Override
-    public FmtMainDataBinding getViewDataBinding() {
-        return (FmtMainDataBinding) super.getViewDataBinding();
+    private void initArticleList() {
+        if (articleViewModel.getArticleList().getValue() == null) {
+            getMVVMPresenter().getArticleList(mPageIndex);
+        } else {
+            mList.addAll(articleViewModel.getArticleList().getValue());
+        }
     }
 
     @Override
@@ -87,10 +90,16 @@ public class ModuleMainFragment extends BaseFragment<IArticleView, ArticlePresen
         } else {
             getViewDataBinding().refreshLayout.finishLoadMore();
         }
-
         mList.addAll(list);
         articleAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        articleViewModel.getArticleList().setValue(mList);
+    }
+
 
     @Override
     public void onArticleListError(int pageIndex, int code, String msg) {

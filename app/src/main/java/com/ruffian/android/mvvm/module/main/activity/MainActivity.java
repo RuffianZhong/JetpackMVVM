@@ -5,6 +5,11 @@ import android.view.KeyEvent;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.ruffian.android.framework.mvvm.presenter.MVVMPresenter;
+import com.ruffian.android.framework.mvvm.view.IMVVMView;
 import com.ruffian.android.mvvm.R;
 import com.ruffian.android.mvvm.common.BaseActivity;
 import com.ruffian.android.mvvm.databinding.MainDataBinding;
@@ -16,10 +21,7 @@ import com.ruffian.android.mvvm.module.main.fragment.ModuleProjectFragment;
 import com.ruffian.android.mvvm.module.main.view.IMainView;
 import com.ruffian.android.mvvm.utils.AppUtils;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-public class MainActivity extends BaseActivity implements IMainView {
+public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMView>, MainDataBinding> implements IMainView {
 
     private static final String KEY_TAG = "fragment_tag";
     private final String[] mFragmentTags = new String[]{"fragment_tags_0", "fragment_tags_1", "fragment_tags_2", "fragment_tags_3", "fragment_tags_4"};
@@ -30,8 +32,8 @@ public class MainActivity extends BaseActivity implements IMainView {
     private ModuleMainFragment mainFragment;
     private ModuleKnowledgeFragment knowledgeFragment;
     private ModuleOfficialAccountFragment officialAccountFragment;
-    private ModuleMeFragment meFragment;
     private ModuleProjectFragment projectFragment;
+    private ModuleMeFragment meFragment;
 
     //上次回退事件时间
     private long mLastBackEventTime = 0;
@@ -43,7 +45,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         this.mSavedInstanceState = savedInstanceState;
 
         getViewDataBinding().setLifecycleOwner(this);
-        ((MainDataBinding) getViewDataBinding()).setMainView(this);
+        getViewDataBinding().setMainView(this);
         initShowTabView();
     }
 
@@ -72,8 +74,8 @@ public class MainActivity extends BaseActivity implements IMainView {
             mainFragment = (ModuleMainFragment) fragmentManager.findFragmentByTag(mFragmentTags[0]);
             knowledgeFragment = (ModuleKnowledgeFragment) fragmentManager.findFragmentByTag(mFragmentTags[1]);
             officialAccountFragment = (ModuleOfficialAccountFragment) fragmentManager.findFragmentByTag(mFragmentTags[2]);
-            meFragment = (ModuleMeFragment) fragmentManager.findFragmentByTag(mFragmentTags[3]);
-            projectFragment = (ModuleProjectFragment) fragmentManager.findFragmentByTag(mFragmentTags[4]);
+            projectFragment = (ModuleProjectFragment) fragmentManager.findFragmentByTag(mFragmentTags[3]);
+            meFragment = (ModuleMeFragment) fragmentManager.findFragmentByTag(mFragmentTags[4]);
         }
         showTabView(0);
     }
