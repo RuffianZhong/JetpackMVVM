@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MVVM-Account</string>
+    <string name="placeholder">--</string>
+    <string name="hint_account">请输入账号</string>
+    <string name="hint_psw">请输入密码</string>
+    <string name="login">登录</string>
+</resources>

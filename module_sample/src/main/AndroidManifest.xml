@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ruffian.android.module.sample">
+
+    <application>
+        <activity android:name=".LoginActivity" />
+    </application>
+    <!--作为library集成到壳项目时的配置文件-->
+</manifest>

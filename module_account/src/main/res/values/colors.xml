@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--bg-->
+    <color name="btn_bg_start">#00D09F</color>
+    <color name="btn_bg_end">#00A366</color>
+    <array name="array_btn_bg">
+        <item>@color/btn_bg_start</item>
+        <item>@color/btn_bg_end</item>
+    </array>
+    <array name="array_tab_bg_default">
+        <item>@color/transparent</item>
+        <item>@color/transparent</item>
+    </array>
+
+</resources>

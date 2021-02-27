@@ -1,3 +1,8 @@
+include ':module_sample'
+include ':module_main'
+include ':module_account'
+include ':library_common'
+include ':module_article'
 include ':framework_http'
 include ':framework_mvvm'
 include ':app'

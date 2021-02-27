@@ -1,22 +1,24 @@
 package com.ruffian.android.mvvm;
 
 
-import android.app.Application;
+import android.content.Context;
 
-import com.ruffian.android.framework.http.RHttp;
+import androidx.multidex.MultiDex;
 
-public class RApp extends Application {
+import com.ruffian.android.library.common.base.BaseApp;
 
-    /*http请求基础路径*/
-    public static final String BASE_API = "https://www.wanandroid.com/";
+
+public class RApp extends BaseApp {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //必须初始化
-        RHttp.Configure.get()
-                .baseUrl(BASE_API)                   //基础URL
-                .init(this);                        //初始化
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
 }

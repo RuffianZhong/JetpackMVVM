@@ -9,7 +9,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -18,6 +18,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 
     //view绑定
@@ -33,35 +37,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation project(':library_common')//library_common
+    implementation project(':module_main')//主页模块
+    //implementation project(':module_article')//文章模块
+    implementation project(':module_account')//账户模块
+    implementation project(':module_sample')//示例模块
 
-    implementation project(':framework_mvvm')
-    implementation project(':framework_http')
-
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'com.ruffian.library:RWidgetHelper-AndroidX:0.0.8'
-    implementation 'com.google.android.material:material:1.1.0-alpha10'
-    /*glide*/
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
-    /*recyclerview*/
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    /*RecyclerView适配器*/
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-    /*refresh*/
-    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
-    implementation 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
-    implementation 'com.scwang.smart:refresh-header-radar:2.0.3'       //雷达刷新头
-    implementation 'com.scwang.smart:refresh-header-falsify:2.0.3'     //虚拟刷新头
-    implementation 'com.scwang.smart:refresh-header-material:2.0.3'    //谷歌刷新头
-    implementation 'com.scwang.smart:refresh-header-two-level:2.0.3'   //二级刷新头
-    implementation 'com.scwang.smart:refresh-footer-ball:2.0.3'        //球脉冲加载
-    implementation 'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
-    // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0"
 
 }

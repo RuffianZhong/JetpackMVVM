@@ -1,0 +1,99 @@
+<resources>
+
+    <!--NoActionBar-->
+    <style name="BaseAppTheme.NoActionBar" parent="@style/Theme.AppCompat.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="BaseAppTheme.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--闪屏页面主题，黑白屏优化-->
+    <style name="AppTheme.Splash">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
+        <item name="android:windowBackground">@drawable/style_splash_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--Loading弹窗-->
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--基础style封装-->
+    <style name="wrap">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="match">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="match_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="wrap_match">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="wrap_tv_14" parent="wrap">
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="wrap_tv_13" parent="wrap">
+        <item name="android:textSize">@dimen/sp_13</item>
+    </style>
+
+    <style name="wrap_tv_12" parent="wrap">
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="wrap_tv_14_black" parent="wrap_tv_14">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="wrap_tv_13_black" parent="wrap_tv_13">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="wrap_tv_12_black" parent="wrap_tv_12">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="wrap_tv_14_white" parent="wrap_tv_14">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="wrap_tv_13_white" parent="wrap_tv_13">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="wrap_tv_12_white" parent="wrap_tv_12">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+</resources>

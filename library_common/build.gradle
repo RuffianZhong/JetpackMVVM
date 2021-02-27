@@ -1,0 +1,77 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //view绑定
+    viewBinding {
+        enabled = true
+    }
+
+    //数据绑定
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    api fileTree(dir: "libs", include: ["*.jar"])
+    api 'androidx.appcompat:appcompat:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api project(':framework_mvvm')//mvvm框架
+    api project(':framework_http')//http框架
+
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api 'com.ruffian.library:RWidgetHelper-AndroidX:0.0.8'
+    api 'com.google.android.material:material:1.1.0-alpha10'
+    /*glide*/
+    api 'com.github.bumptech.glide:glide:3.7.0'
+    /*recyclerview*/
+    api 'androidx.recyclerview:recyclerview:1.1.0'
+    /*RecyclerView适配器*/
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+    /*refresh*/
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    api 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+    api 'com.scwang.smart:refresh-header-radar:2.0.3'       //雷达刷新头
+    api 'com.scwang.smart:refresh-header-falsify:2.0.3'     //虚拟刷新头
+    api 'com.scwang.smart:refresh-header-material:2.0.3'    //谷歌刷新头
+    api 'com.scwang.smart:refresh-header-two-level:2.0.3'   //二级刷新头
+    api 'com.scwang.smart:refresh-footer-ball:2.0.3'        //球脉冲加载
+    api 'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
+    // ViewModel
+    api "androidx.lifecycle:lifecycle-viewmodel:2.2.0"
+    // LiveData
+    api "androidx.lifecycle:lifecycle-livedata:2.2.0"
+    /*ARouter*/
+    api 'com.alibaba:arouter-api:1.5.1'
+
+}

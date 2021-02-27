@@ -94,7 +94,7 @@ public class HttpResult<T> implements IHttpResult, IParseHelper {
     private <T> Type getGenericType(HttpCallback<T> httpCallback) {
         //com.ruffian.android.framework.http.HttpCallback<com.ruffian.android.mvvm.Response<com.ruffian.android.xx.UserBean>>
         Type[] types = httpCallback.getClass().getGenericInterfaces();
-        //com.ruffian.android.mvvm.Response<com.ruffian.android.mvvm.module.account.entity.UserBean>
+        //com.ruffian.android.mvvm.Response<com.ruffian.android.module.account.entity.UserBean>
         Type[] params = ((ParameterizedType) types[0]).getActualTypeArguments();
         return params[0];
     }
