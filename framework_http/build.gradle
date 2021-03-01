@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion build_versions.compile_sdk
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 29
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
 
@@ -23,16 +23,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation deps.appcompat
     /*网络请求框架*/
-    api 'com.squareup.retrofit2:retrofit:2.3.0'
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    api 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    api deps.retrofit.retrofit
+    api deps.retrofit.converter_gson
+    api deps.retrofit.adapter_rxjava2
+    api deps.okhttp.logging_interceptor
     /*RxJava*/
-    api 'io.reactivex.rxjava2:rxjava:2.2.10'
-    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api deps.rxjava.rxjava
+    api deps.rxjava.rxandroid
 }

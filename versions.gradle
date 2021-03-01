@@ -1,0 +1,72 @@
+ext.deps = [:]
+
+def versions = [:]
+versions.glide = "3.7.0"
+versions.rxjava = "2.2.10"
+versions.rxandroid = "2.1.1"
+versions.retrofit = "2.3.0"
+versions.okhttp = "3.8.0"
+versions.lifecycle_viewmodel = "2.2.0"
+versions.lifecycle_livedata = "2.2.0"
+versions.arouter_api = "1.5.1"
+versions.arouter_compiler="1.5.1"
+versions.RWidgetHelper = "0.0.8"
+versions.recyclerview = "1.1.0"
+versions.BaseRecyclerViewAdapterHelper = "3.0.4"
+versions.refresh = "2.0.3"
+versions.appcompat = "1.2.0"
+versions.constraintlayout = "2.0.4"
+versions.material = "1.1.0-alpha10"
+
+def deps = [:]
+
+def retrofit = [:]
+retrofit.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+deps.retrofit = retrofit
+
+def okhttp = [:]
+okhttp.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+deps.okhttp = okhttp
+
+def rxjava = [:]
+rxjava.rxjava = "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+rxjava.rxandroid = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+deps.rxjava = rxjava
+
+def refresh = [:]
+refresh.kernel = "com.scwang.smart:refresh-layout-kernel:$versions.refresh"
+refresh.header_classics = "com.scwang.smart:refresh-header-classics:$versions.refresh"
+deps.refresh = refresh
+
+
+/*零散*/
+deps.RWidgetHelper = "com.ruffian.library:RWidgetHelper-AndroidX:$versions.RWidgetHelper"
+deps.arouter_api = "com.alibaba:arouter-api:$versions.arouter_api"
+deps.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+deps.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+deps.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+deps.material = "com.google.android.material:material:$versions.material"
+deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
+deps.BaseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.BaseRecyclerViewAdapterHelper"
+deps.viewmodel = "androidx.lifecycle:lifecycle-viewmodel:$versions.lifecycle_viewmodel"
+deps.livedata = "androidx.lifecycle:lifecycle-livedata:$versions.lifecycle_livedata"
+
+
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 19
+build_versions.target_sdk = 29
+build_versions.compile_sdk = 29
+build_versions.build_tools = "29.0.2"
+ext.build_versions = build_versions
+
+def apk_versions = [:]
+apk_versions.versionCode = 1
+apk_versions.versionName = "1.0"
+ext.apk_versions = apk_versions
+
+
