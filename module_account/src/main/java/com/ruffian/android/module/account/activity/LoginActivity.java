@@ -67,13 +67,4 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public LifecycleOwner getLifecycleOwner() {
-        return null;
-    }
-
-    @Override
-    public Activity getActivity() {
-        return null;
-    }
 }

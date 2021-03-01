@@ -34,6 +34,7 @@ public class RxJavaObserver<T> implements Observer<T>, IAsyncCancel, LifecycleOb
 
     @Override
     public void onError(Throwable e) {
+        e.printStackTrace();
         AsyncManager.get().removeDisposable(mDisposableTag);
     }
 
