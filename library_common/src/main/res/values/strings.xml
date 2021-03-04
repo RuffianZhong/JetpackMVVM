@@ -1,0 +1,8 @@
+<resources>
+    <string name="placeholder">--</string>
+    <string name="m_main">首页</string>
+    <string name="m_knowledge">知识体系</string>
+    <string name="m_official_account">公众号</string>
+    <string name="m_me">我的</string>
+    <string name="m_project">项目</string>
+</resources>

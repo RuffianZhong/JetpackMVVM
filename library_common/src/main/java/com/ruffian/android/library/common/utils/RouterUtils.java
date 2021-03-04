@@ -17,4 +17,8 @@ public class RouterUtils {
         ARouter.getInstance().build(path).navigation();
     }
 
+    public static <T> T build(String path) {
+        return (T) ARouter.getInstance().build(path).navigation();
+    }
+
 }

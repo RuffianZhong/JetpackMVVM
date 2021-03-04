@@ -8,6 +8,9 @@ android {
     compileSdkVersion build_versions.compile_sdk
 
     defaultConfig {
+        if (isModule.toBoolean()) {
+            applicationId "com.ruffian.android.mvvm.module.sample"
+        }
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1

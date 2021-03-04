@@ -1,16 +1,19 @@
-if (isModule.toBoolean()) {
+/*if (isModule.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
-}
+}*/
+//由于Main组件目前定位是整合且未完善，暂时不允许单独运行调试，只作为lib引入到app之后运行
+apply plugin: 'com.android.library'
+
 
 android {
     compileSdkVersion build_versions.compile_sdk
 
     defaultConfig {
-        if (isModule.toBoolean()) {
+        /*if (isModule.toBoolean()) {
             applicationId "com.ruffian.android.mvvm.module.main"
-        }
+        }*/
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1

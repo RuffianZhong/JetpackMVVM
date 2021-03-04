@@ -1,9 +1,16 @@
-apply plugin: 'com.android.library'
+if (isModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 android {
     compileSdkVersion build_versions.compile_sdk
 
     defaultConfig {
+        if (isModule.toBoolean()) {
+            applicationId "com.ruffian.android.mvvm.module.article"
+        }
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode 1

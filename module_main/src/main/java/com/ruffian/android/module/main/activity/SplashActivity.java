@@ -19,7 +19,7 @@ public class SplashActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RouterUtils.navigation(RouterConfig.path_login);
+        RouterUtils.navigation(RouterConfig.path_act_login);
         finish();
     }
 

@@ -12,21 +12,18 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ruffian.android.framework.mvvm.presenter.MVVMPresenter;
 import com.ruffian.android.framework.mvvm.view.IMVVMView;
 import com.ruffian.android.library.common.base.BaseActivity;
+import com.ruffian.android.library.common.base.BaseFragment;
 import com.ruffian.android.library.common.config.RouterConfig;
 import com.ruffian.android.library.common.utils.AppUtils;
+import com.ruffian.android.library.common.utils.RouterUtils;
 import com.ruffian.android.module.main.R;
 import com.ruffian.android.module.main.databinding.MainDataBinding;
-import com.ruffian.android.module.main.fragment.ModuleKnowledgeFragment;
-import com.ruffian.android.module.main.fragment.ModuleMainFragment;
-import com.ruffian.android.module.main.fragment.ModuleMeFragment;
-import com.ruffian.android.module.main.fragment.ModuleOfficialAccountFragment;
-import com.ruffian.android.module.main.fragment.ModuleProjectFragment;
 import com.ruffian.android.module.main.view.IMainView;
 
 /**
  * 主页
  */
-@Route(path = RouterConfig.path_main)
+@Route(path = RouterConfig.path_act_main)
 public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMView>, MainDataBinding> implements IMainView {
 
     private static final String KEY_TAG = "fragment_tag";
@@ -34,12 +31,16 @@ public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMVie
 
     private Bundle mSavedInstanceState;
 
+    /**
+     * ModuleKnowledgeFragment/ModuleOfficialAccountFragment/ModuleProjectFragment
+     * 需要拆分到对应的模块，此处暂时未开发
+     */
     private int mCachePosition = -1;
-    private ModuleMainFragment mainFragment;
-    private ModuleKnowledgeFragment knowledgeFragment;
-    private ModuleOfficialAccountFragment officialAccountFragment;
-    private ModuleProjectFragment projectFragment;
-    private ModuleMeFragment meFragment;
+    private BaseFragment mainFragment;
+    private BaseFragment knowledgeFragment;
+    private BaseFragment officialAccountFragment;
+    private BaseFragment projectFragment;
+    private BaseFragment meFragment;
 
     //上次回退事件时间
     private long mLastBackEventTime = 0;
@@ -77,11 +78,11 @@ public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMVie
         if (mSavedInstanceState != null) { //Activity被重新创建
             mCachePosition = mSavedInstanceState.getInt(KEY_TAG);
             FragmentManager fragmentManager = getSupportFragmentManager();
-            mainFragment = (ModuleMainFragment) fragmentManager.findFragmentByTag(mFragmentTags[0]);
-            knowledgeFragment = (ModuleKnowledgeFragment) fragmentManager.findFragmentByTag(mFragmentTags[1]);
-            officialAccountFragment = (ModuleOfficialAccountFragment) fragmentManager.findFragmentByTag(mFragmentTags[2]);
-            projectFragment = (ModuleProjectFragment) fragmentManager.findFragmentByTag(mFragmentTags[3]);
-            meFragment = (ModuleMeFragment) fragmentManager.findFragmentByTag(mFragmentTags[4]);
+            mainFragment = (BaseFragment) fragmentManager.findFragmentByTag(mFragmentTags[0]);
+            knowledgeFragment = (BaseFragment) fragmentManager.findFragmentByTag(mFragmentTags[1]);
+            officialAccountFragment = (BaseFragment) fragmentManager.findFragmentByTag(mFragmentTags[2]);
+            projectFragment = (BaseFragment) fragmentManager.findFragmentByTag(mFragmentTags[3]);
+            meFragment = (BaseFragment) fragmentManager.findFragmentByTag(mFragmentTags[4]);
         }
         showTabView(0);
     }
@@ -94,7 +95,8 @@ public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMVie
         switch (position) {
             case 0://ModuleMainFragment
                 if (mainFragment == null) {
-                    mainFragment = new ModuleMainFragment();
+                    //mainFragment = new ModuleMainFragment();
+                    mainFragment = RouterUtils.build(RouterConfig.path_fmt_main);
                     transaction.add(R.id.layout_content, mainFragment, mFragmentTags[position]);
                 } else {
                     transaction.show(mainFragment);
@@ -102,7 +104,8 @@ public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMVie
                 break;
             case 1://ModuleKnowledgeFragment
                 if (knowledgeFragment == null) {
-                    knowledgeFragment = new ModuleKnowledgeFragment();
+                    //knowledgeFragment = new ModuleKnowledgeFragment();
+                    knowledgeFragment = RouterUtils.build(RouterConfig.path_fmt_knowledge);
                     transaction.add(R.id.layout_content, knowledgeFragment, mFragmentTags[position]);
                 } else {
                     transaction.show(knowledgeFragment);
@@ -110,7 +113,8 @@ public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMVie
                 break;
             case 2://ModuleOfficialAccountFragment
                 if (officialAccountFragment == null) {
-                    officialAccountFragment = new ModuleOfficialAccountFragment();
+                    //officialAccountFragment = new ModuleOfficialAccountFragment();
+                    officialAccountFragment = RouterUtils.build(RouterConfig.path_fmt_official_account);
                     transaction.add(R.id.layout_content, officialAccountFragment, mFragmentTags[position]);
                 } else {
                     transaction.show(officialAccountFragment);
@@ -118,7 +122,8 @@ public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMVie
                 break;
             case 3://ModuleProjectFragment
                 if (projectFragment == null) {
-                    projectFragment = new ModuleProjectFragment();
+                    // projectFragment = new ModuleProjectFragment();
+                    projectFragment = RouterUtils.build(RouterConfig.path_fmt_project);
                     transaction.add(R.id.layout_content, projectFragment, mFragmentTags[position]);
                 } else {
                     transaction.show(projectFragment);
@@ -126,7 +131,8 @@ public class MainActivity extends BaseActivity<IMVVMView, MVVMPresenter<IMVVMVie
                 break;
             case 4://ModuleMeFragment
                 if (meFragment == null) {
-                    meFragment = new ModuleMeFragment();
+                    //   meFragment = new ModuleMeFragment();
+                    meFragment = RouterUtils.build(RouterConfig.path_fmt_me);
                     transaction.add(R.id.layout_content, meFragment, mFragmentTags[position]);
                 } else {
                     transaction.show(meFragment);

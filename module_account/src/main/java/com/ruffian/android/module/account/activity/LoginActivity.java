@@ -1,13 +1,11 @@
 package com.ruffian.android.module.account.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ruffian.android.library.common.base.BaseActivity;
@@ -24,7 +22,7 @@ import com.ruffian.android.module.account.view.IAccountView;
  *
  * @author ZhongDaFeng
  */
-@Route(path = RouterConfig.path_login)
+@Route(path = RouterConfig.path_act_login)
 public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPresenter, LoginDataBinding> implements IAccountView.ILoginView {
 
 
@@ -48,7 +46,7 @@ public class LoginActivity extends BaseActivity<IAccountView.ILoginView, LoginPr
 
     @Override
     public void loginSuccess(UserBean userBean) {
-        RouterUtils.navigation(RouterConfig.path_main);
+        RouterUtils.navigation(RouterConfig.path_act_main);
     }
 
     @Override

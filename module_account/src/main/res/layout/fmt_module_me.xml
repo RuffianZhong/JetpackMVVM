@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="MeDataBinding">
+
+        <variable
+            name="userViewModel"
+            type="com.ruffian.android.module.account.viewmodel.UserViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/view_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/tv_my_collection"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            style="@style/wrap_tv_14_white"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{userViewModel.userBean.nickname??@string/placeholder}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_icon"
+            tools:text="@string/placeholder" />
+
+        <com.ruffian.library.widget.RImageView
+            android:id="@+id/iv_user_icon"
+            android:layout_width="@dimen/dp_65"
+            android:layout_height="@dimen/dp_65"
+            android:layout_marginTop="@dimen/dp_65"
+            app:imageUrl="@{userViewModel.userBean.icon}"
+            app:is_circle="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
+
+        <com.ruffian.library.widget.RTextView
+            android:id="@+id/tv_my_collection"
+            style="@style/wrap_tv_14_black"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_16"
+            android:text="@string/me_collection"
+            app:icon_height_left="@dimen/dp_20"
+            app:icon_normal_left="@mipmap/ic_launcher"
+            app:icon_width_left="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
+
+
+        <com.ruffian.library.widget.RTextView
+            android:id="@+id/tv_my_todo"
+            style="@style/wrap_tv_14_black"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_16"
+            android:text="@string/me_todo"
+            app:icon_height_left="@dimen/dp_20"
+            app:icon_normal_left="@mipmap/ic_launcher"
+            app:icon_width_left="@dimen/dp_20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_collection" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -40,8 +40,10 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation project(':library_common')//library_common
     implementation project(':module_main')//主页模块
-    //implementation project(':module_article')//文章模块
+    implementation project(':module_article')//文章模块
     implementation project(':module_account')//账户模块
+    implementation project(':module_knowledge')//知识体系模块
+    implementation project(':module_project')//项目模块
     implementation project(':module_sample')//示例模块
 
 
